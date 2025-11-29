@@ -1,0 +1,9 @@
+{% extends "guidance/base.html" %}
+{% block content %}
+<h2>Recommended Courses</h2>
+<ul>
+    {% for course in courses %}
+        <li><b>{{ course.name }}</b>: {{ course.description }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

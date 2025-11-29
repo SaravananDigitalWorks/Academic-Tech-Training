@@ -1,0 +1,30 @@
+{% extends "events/base.html" %}
+{% block title %}
+Upload Images
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for image in existing_images %}
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="{{ image.image.url }}" class="card-img-top" alt="{{ event.name }}">
+                    <div class="card-body">
+                        <form method="post" action="{% url 'events:delete_event_image' image.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <h1>Upload Images for {{ event.name }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Upload</button>
+        <a href="{% url 'events:organizer_dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

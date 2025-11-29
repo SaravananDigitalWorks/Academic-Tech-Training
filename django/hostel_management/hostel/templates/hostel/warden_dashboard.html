@@ -1,0 +1,26 @@
+{% extends "hostel/base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Warden Dashboard</h1>
+    {% if applications %}
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Student</th>
+            <th>Hostel Building</th>
+            <th>Room Type</th>
+            <th>Action</th>
+        </tr>
+        {% for application in applications %}
+        <tr>
+            <td>{{ application.student.name }}</td>
+            <td>{{ application.preferred_hostel_building.name }}</td>
+            <td>{{ application.preferred_room_type }}</td>
+            <td><a href="{% url 'hostel:approve_application' application.id %}">Approve</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No applications for review</p>
+    {% endif %}
+</div>
+{% endblock %}

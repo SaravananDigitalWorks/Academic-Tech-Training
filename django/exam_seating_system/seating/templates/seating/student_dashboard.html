@@ -1,0 +1,30 @@
+{% extends "seating/base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Student Dashboard - <small>Welcome {{ student.name }} </small></h1>
+    {% if seating %}
+    <h3>Your Seating Arrangements</h3>
+    <table class = 'table table-striped'>
+        <tr>
+            <th>Exam Hall</th>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Row</th>
+            <th>Seat</th>
+        </tr>
+        {% for arr in seating %}
+        <tr>
+            <td>{{ arr.exam_hall.name }}</td>
+            <td>{{ arr.subject.code }}</td>
+            <td>{{ arr.subject.name }}</td>
+            <td>{{ arr.row }}</td>
+            <td>{{ arr.seat }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No seating information</p>
+    {% endif %}
+ </div>
+
+{% endblock %}

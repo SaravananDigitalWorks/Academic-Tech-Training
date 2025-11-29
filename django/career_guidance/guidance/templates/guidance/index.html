@@ -1,0 +1,25 @@
+{% extends "guidance/base.html" %}
+{% block content %}
+<div class="container">
+   <p>
+      <h3 class="row justify-content-center"> Career Guidance for Students</h3>
+   </p>
+<p>Choosing a career is one of the most important decisions in a student's life. It can shape their future, influence their happiness, and define their professional and personal goals. However, with the increasing variety of career options available today, many students find themselves uncertain about which direction to take.
+</p>
+
+<p>Career guidance aims to assist students in making these crucial decisions by offering them the tools, knowledge, and resources to better understand themselves, their skills, and the opportunities that align with their aspirations. Whether it's through identifying passions, researching potential careers, or exploring various fields through internships, career guidance helps students set a clear course for their future.
+</p>
+
+<p>As part of this process, career counselors work closely with students to assess their strengths, preferences, and academic achievements, helping them recognize viable career options. Students are encouraged to explore various professional fields, gain real-world experience, and seek mentorship, all of which foster greater confidence and direction in their career choices.
+   </p>
+   <p>
+    The Student Career Guidance System is a web-based application built with Django to help students who have completed 12th grade find suitable courses based on their interests and preferences. The system presents students with a series of Yes/No questions designed to assess their aptitude, skills, and career aspirations. Based on their responses, the system suggests a list of relevant courses that match their criteria. The admin panel allows administrators to configure the list of questions and courses dynamically, ensuring that the recommendations stay up to date with educational trends and industry demands.
+   </p>
+   <p>
+    To enhance course-matching accuracy, the system incorporates a detailed scoring logic that evaluates students' answers against predefined course eligibility criteria. Each course is associated with specific question weights, allowing the system to generate personalized course recommendations. Students can create accounts and log in to save their progress, enabling them to revisit and refine their choices later. This ensures a seamless and interactive experience, preventing data loss and allowing for future updates to their preferences.
+   </p>
+   <p>
+    Additionally, the system features email notifications, automatically sending students their suggested courses once they complete the questionnaire. This provides them with an accessible record of their options for further exploration. The project follows a modular approach in Django, making it scalable and maintainable, with a focus on user-friendly navigation and efficient data processing.
+   </p>
+</div>
+{% endblock %}

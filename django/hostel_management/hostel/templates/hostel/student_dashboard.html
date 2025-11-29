@@ -1,0 +1,13 @@
+{% extends "hostel/base.html" %}
+{% block content %}
+<h1>Student Dashboard</h1>
+{% if application %}
+    <p>Application Status: {{ application.status }}</p>
+    {% if application.allotted_room %}
+        <p>Allotted Room: {{ application.allotted_room }}</p>
+    {% endif %}
+{% else %}
+    <p><a href="{% url 'hostel:apply_hostel' %}">Apply for hostel</a></p>
+{% endif %}
+
+{% endblock %}

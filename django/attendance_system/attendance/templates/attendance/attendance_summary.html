@@ -1,0 +1,23 @@
+{% extends "attendance/base.html" %}
+Attendance Tracking System | {% block title %}
+Summary
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Attendance Summary for {{ class_obj.name }}</h1>
+    <table>
+        <tr>
+            <th>Student</th>
+            <th>Present Days</th>
+            <th>Percentage</th>
+        </tr>
+        {% for data in attendance_data %}
+        <tr>
+            <td>{{ data.student.name }}</td>
+            <td>{{ data.present_days }}</td>
+            <td>{{ data.percentage }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

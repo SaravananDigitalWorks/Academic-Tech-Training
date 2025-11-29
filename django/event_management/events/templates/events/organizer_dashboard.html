@@ -1,0 +1,29 @@
+{% extends "events/base.html" %}
+{% block title %}
+Organizer Dashboard
+{% endblock %}
+{% block content %}
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Organizer Dashboard</h1>
+        <a href="{% url 'events:add_event' %}" class="btn btn-success">Add Event</a>
+    </div>
+    <a href="{% url 'events:event_list' %}" class="btn btn-secondary mb-3">Back to Event List</a>
+    <h2>Your Events</h2>
+    <div class="row">
+        {% for event in events %}
+            <div class="col-md-4">
+                <div class="card event-card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ event.name }}</h5>
+                        <p class="card-text">{{ event.description|truncatewords:20 }}</p>
+                        <a href="{% url 'events:edit_event' event.id %}" class="btn btn-primary">Edit Event</a>
+                        <a href="{% url 'events:upload_event_images' event.id %}" class="btn btn-info">Upload Images</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+</div>
+</div>
+{% endblock %}

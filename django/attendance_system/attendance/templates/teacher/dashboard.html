@@ -1,0 +1,22 @@
+{% extends "attendance/base.html" %}
+{% block content %}
+<h2>Welcome, {{ user.teacher.name }}!</h2>
+{{ user.teacher }}
+<table>
+    <thead>
+        <tr>
+            <th>Class Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for class in classes %}
+            <tr>
+                <td>{{ class.name }}</td>
+                <td><a class="btn btn-primary" href="{% url 'attendance:mark_attendance' class.id %}">Attendance</a></td>
+            </tr>
+    
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

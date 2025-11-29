@@ -1,0 +1,29 @@
+{% extends "attendance/base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Welcome, {{ user.student.name }}!</h2>
+    <h3>Your Attendance Summary</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Class</th>
+                <th>Total Days</th>
+                <th>Present Days</th>
+                <th>Absent Days</th>
+                <th>Percentage</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for summary in attendance_summary %}
+            <tr>
+                <td>{{ summary.class.name }}</td>
+                <td>{{ summary.total_days }}</td>
+                <td>{{ summary.present_days }}</td>
+                <td>{{ summary.absent_days }}</td>
+                <td>{{ summary.percentage }}%</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

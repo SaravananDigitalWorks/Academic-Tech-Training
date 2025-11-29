@@ -1,0 +1,13 @@
+{% extends "guidance/base.html" %}
+{% block content %}
+<h2>Career Guidance Questionnaire</h2>
+<form method="post">
+    {% csrf_token %}
+    {% for question in questions %}
+        <p>{{ question.text }}</p>
+        <label><input type="radio" name="{{ question.id }}" value="yes" required> Yes</label>
+        <label><input type="radio" name="{{ question.id }}" value="no" required> No</label>
+    {% endfor %}
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

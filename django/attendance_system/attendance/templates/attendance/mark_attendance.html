@@ -1,0 +1,34 @@
+{% extends "attendance/base.html" %}
+Attendance Tracking System | {% block title %}
+Mark attendance
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h1>Mark Attendance for {{ class_obj.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="date">Date:</label>
+        <input type="date" name="date" required>
+        <label for="session">Session:</label>
+        <select name="session" required>
+            <option value="M">Morning</option>
+            <option value="E">Evening</option>
+        </select>
+        <table>
+            <tr>
+                <th>Student</th>
+                <th>Status</th>
+            </tr>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>
+                    <input type="checkbox" name="status_{{ student.id }}" checked> Present
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Save Attendance</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "inventory/base.html" %}
+{% block content %}
+<script>
+    function sendProducts() {
+        fetch("/send-products/", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": getCSRFToken(), // Include CSRF token
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => alert("Error sending message."));
+    }
+
+    // Function to get CSRF token from cookies
+    function getCSRFToken() {
+        let cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+            let [name, value] = cookie.trim().split("=");
+            if (name === "csrftoken") {
+                return value;
+            }
+        }
+        return "";
+    }
+</script>
+<div class="container">
+    <p>
+        <a class="btn btn-primary" href="{% url 'inventory:add_product' %}">Add product</a> <button class="btn btn-secondary" onclick="sendProducts()">Send Expiry Products</button>
+    </p>
+    {% if products %}
+    <h2>Product List</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Manufacturing Date</th>
+            <th>Expiry Date</th>
+            <th>Quantity</th>            
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.grocery_type }}</td>
+            <td>{{ product.manufacturing_date }}</td>
+            <td>{{ product.expiry_date }}</td>
+            <td>{{ product.quantity }}</td>            
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

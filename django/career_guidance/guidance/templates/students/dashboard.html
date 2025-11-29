@@ -1,0 +1,10 @@
+{% extends "guidance/base.html" %}
+{% block content %}
+<h2>Welcome, {{ user.username }}!</h2>
+<p>This is your student dashboard.</p>
+<ul>
+    <li><a href="{% url 'guidance:questionnaire' %}">Take Career Questionnaire</a></li>
+    <li><a href="{% url 'guidance:recommendations' %}">View Recommendations</a></li>    
+</ul>
+
+{% endblock %}

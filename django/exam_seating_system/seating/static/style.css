@@ -1,0 +1,21 @@
+body {
+    background-color: white;  
+  }
+  
+  footer {
+    position: fixed;
+    bottom: 0;
+    padding: 0px;
+    text-align: center;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    z-index: 1000;
+  }
+  

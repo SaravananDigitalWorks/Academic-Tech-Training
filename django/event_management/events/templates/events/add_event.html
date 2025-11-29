@@ -1,0 +1,107 @@
+{% extends "events/base.html" %}
+{% block title %}
+Add an Event
+{% endblock %}
+{% block content %}
+<div class="container">
+   <h1>Add Event</h1>
+   <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <!-- Event Form -->
+      <h2>Event Details</h2>
+      {{ event_form.as_p }}
+
+      <!-- Event Dates Formset -->
+      <h2>Event Dates</h2>
+      {{ date_formset.management_form }}
+      <div id="dates-container">
+         {% for date_form in date_formset %}
+         <div class="date-form">
+            {{ date_form.as_p }}
+
+            <!-- Agendas Formset for Each Date -->
+            <h3>Agendas</h3>
+            {% with prefix=date_form.prefix %}
+            {% with agenda_formset=AgendaFormSet prefix='agendas-'|add:prefix %}
+            {{ agenda_formset.management_form }}
+            <div id="agendas-{{ prefix }}-container">
+               {% for agenda_form in agenda_formset %}
+               <div class="agenda-form">
+                  {{ agenda_form.as_p }}
+               </div>
+               {% endfor %}
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="addAgendaForm('{{ prefix }}')">Add
+               Agenda</button>
+            {% endwith %}
+            {% endwith %}
+         </div>
+         {% endfor %}
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="addDateForm()">Add Date</button>
+
+      <!-- Event Images Formset -->
+      <h2>Event Images</h2>
+      {{ image_formset.management_form }}
+      <div id="images-container">
+         {% for image_form in image_formset %}
+         <div class="image-form">
+            {{ image_form.as_p }}
+         </div>
+         {% endfor %}
+      </div>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="addImageForm()">Add Image</button>
+
+      <!-- Save/Submit Button -->
+      <button type="submit" class="btn btn-primary">Save Event</button>
+      <a href="{% url 'events:organizer_dashboard' %}" class="btn btn-secondary">Cancel</a>
+   </form>
+
+   <!-- Empty forms for JavaScript -->
+   <div id="empty-form-date" style="display: none;">
+      {{ date_formset.empty_form.as_p }}
+   </div>
+   <div id="empty-form-agenda" style="display: none;">
+      {{ AgendaFormSet.empty_form.as_p }}
+   </div>
+   <div id="empty-form-image" style="display: none;">
+      {{ image_formset.empty_form.as_p }}
+   </div>
+
+   <!-- JavaScript for dynamic formsets -->
+   <script>
+      // Function to add a new formset
+      function addFormset(prefix, container, emptyFormId) {
+         const totalForms = document.getElementById(`id_${prefix}-TOTAL_FORMS`);
+         const formNum = parseInt(totalForms.value);
+         const newForm = document.getElementById(emptyFormId).innerHTML.replace(/__prefix__/g, formNum);
+         const newFormContainer = document.createElement('div');
+         newFormContainer.innerHTML = newForm;
+         container.appendChild(newFormContainer);
+         totalForms.value = formNum + 1;
+
+         // Initialize datepicker for new date fields
+         $(".datepicker").datepicker({
+            dateFormat: 'yy-mm-dd',  // Format: YYYY-MM-DD
+            minDate: 0,  // Disable past dates
+         });
+      }
+
+      // Add Event Date
+      function addDateForm() {
+         addFormset('dates', document.getElementById('dates-container'), 'empty-form-date');
+      }
+
+      // Add Agenda
+      function addAgendaForm(prefix) {
+         addFormset(`agendas-${prefix}`, document.getElementById(`agendas-${prefix}-container`), 'empty-form-agenda');
+      }
+
+      // Add Event Image
+      function addImageForm() {
+         addFormset('images', document.getElementById('images-container'), 'empty-form-image');
+      }
+   </script>
+</div>
+{% endblock %}
