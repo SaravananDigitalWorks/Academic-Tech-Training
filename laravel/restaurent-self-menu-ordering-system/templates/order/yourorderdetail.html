@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %} - Order Detail{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Order Details
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <form id="viewOrderFrom" name="viewOrderFrom" action="{{url_for('search_order')}}"  method="post" class="needs-validation" novalidate>
+            <div class="form-group">
+              <label for="reference_number">Reference Number:</label>
+              <input type="text" class="form-control" id="reference_number" name="reference_number" placeholder="Enter reference code" required maxlength="6" minlength="6">
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+               
+            </div>    
+            <button class="form-control btn-success" type="submit">Search</button>  
+                      
+             </form>
+             {%if oderdetails%}
+             <br>
+             <p></p>
+             <table class="table table-sm thead-primary">
+              <thead class="table-success">
+                <tr>
+                  <th colspan="4" style="text-align: center;font-weight: bold;">Order ID: {{orderid}}</th>                    
+              </tr>
+                  <tr>
+                      <th>Name</th>
+                      <th>Unit Price</th>                       
+                      <th>Quantity</th>
+                      <th>Total Price</th>
+                  </tr>
+                  
+              </thead>
+              {% for order in oderdetails %}
+              <tr>
+                <td>{{ order.menu_name }}</td>
+                <td><i class="bi bi-currency-rupee"></i> {{ order.menu_price|format_decimal }}</td>
+                <td>
+                  {{ order.quantity }}
+                  </td>
+                <td><i class="bi bi-currency-rupee"></i> {{ order.t_price|format_decimal }}</td>
+            </tr>
+
+            {% else %}<tr>
+                <td colspan="4">No records found</td>
+            </tr>
+           
+            {% endfor %}
+            {% if totalprice %}
+            <tr>
+              <td colspan="2" style="text-align: center; font-weight: bold;">Total</td>
+              <td>  {{ totalquantity }}                   
+                </td>
+              <td><i class="bi bi-currency-rupee"></i> {{ totalprice|format_decimal }}</td>
+            </tr>
+            {%endif%}
+             </table>
+             {%endif%}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      var form = document.getElementById('viewOrderFrom');
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    }, false);
+  })();
+  </script>
+{% endblock %}

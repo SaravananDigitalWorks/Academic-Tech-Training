@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}- Edit book{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card raised-table">
+        <h5 class="card-header">
+          Edit Book
+        </h5>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <form id="editBookForm" name="editBookForm" action="{{ url_for('update_book',id=book.id) }}" method="post" class="needs-validation" novalidate>
+            <div class="form-group">
+              <label for="book_id">Book ID</label>
+              <input type="text" class="form-control" id="book_id" placeholder="Enter book id" name="book_id" required maxlength="10" minlength="5" style="text-transform: uppercase" value="{{book.book_id}}" readonly>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="book_title">Book Title:</label>
+              <input type="text" class="form-control" id="book_title" placeholder="Enter book title" name="book_title" required value="{{book.book_title}}">
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>   
+            <div class="form-group">
+              <label for="book_author">Author:</label>
+              <input type="text" class="form-control" id="book_author" placeholder="Enter book Author(s)" name="book_author" required value="{{book.book_author}}">
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="book_isbn">ISBN:</label>
+              <input type="text" class="form-control" id="book_isbn" placeholder="Enter ISBN" name="book_isbn" maxlength="10" minlength="5" style="text-transform: uppercase" value="{{book.book_isbn}}">
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="book_language">Language:</label>
+              <select class="form-control" id="book_language" name="book_language" required="true">
+                <option value="" selected>Select Language</option>
+                {% for language in languages %}
+                <option value="{{ language.lang_code }}" {%if language.lang_code == book.book_lang_code %} selected {% endif %}>{{ language.lang_description }}</option>
+                {% endfor %}
+
+              </select>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>   
+            <div class="form-group">
+              <label for="book_copy">Number of copies:</label>
+              <input type="text" class="form-control" id="book_copy" placeholder="Enter number of copies" name="book_copy" maxlength="2" minlength="1" value="{{book.book_copy}}" >
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <button class="form-control btn-success btn-block" type="submit">Update Book</button> 
+            <button type="button" class="btn btn-danger btn-block" onclick="redirectToBooks()">View Book(s)</button> 
+            </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  'use strict';
+  window.addEventListener('load', function () {
+    var form = document.getElementById('editBookForm');
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  }, false);
+})();
+</script>
+{% endblock %}

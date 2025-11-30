@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}- Hall Ticket{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card raised-table" id="hallticket">
+        <h5 class="card-header">Hall ticket for {{student.student_name}}</h5>
+        <div class="card-body">
+          <table class="table">
+            <tr>
+              <td>Registration number</td>
+              <td>{{student.reg_number}}</td>
+            </tr>
+            <tr>
+              <td>Center Code</td>
+              <td>{{student.center_code}}</td>
+            </tr>
+            <tr>
+              <td>Center Name</td>
+              <td>{{student.center_name}}</td>
+            </tr>         
+          </table>
+          <table><tr>
+            <td><img src="{{ user_img_data }}" class="img-thumbnail float-left" alt="User image"></td>
+            <td><img src="{{ qr_code_img_data }}" class="img-thumbnail float-right" alt="QR Code"></td>
+          </tr></table>
+          
+        </div>
+        
+
+      </div>
+      <p>
+        <a href="#" class="btn btn-primary btn-block" onclick="printDiv()">Print</a>
+        <a href="{{url_for('list_students')}}" class="btn btn-danger btn-block" >Close</a>
+      </p>
+    </div>
+  </div>
+</div>
+<iframe name="print_frame" width="0" height="0" frameborder="0" src=""></iframe>
+<script>
+   function printDiv() {
+         window.frames["print_frame"].document.body.innerHTML = document.getElementById("hallticket").innerHTML;
+         window.frames["print_frame"].window.focus();
+         window.frames["print_frame"].window.print();
+       }
+</script>
+{% endblock %}

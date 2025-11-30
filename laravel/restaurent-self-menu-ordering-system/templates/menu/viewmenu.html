@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}- Menu{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card raised-table">
+        <h5 class="card-header">
+          Menu
+        </h5>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <table class="table table-sm table-bordered thead-primary">
+            <thead class="table-success">
+              <tr>
+                <th colspan="3" style="text-align: center;">Details</th>
+              </tr>
+            </thead>
+            <tr>
+              <td>Code</td>
+              <td>{{menu.menu_code}}</td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>{{menu.menu_name}}</td>
+            </tr>
+            <tr>
+              <td>Price</td>
+              <td><i class="bi bi-currency-rupee"></i> {{menu.menu_price|format_decimal}}</td>
+            </tr>
+          </table>
+          <table class="table table-sm table-bordered thead-primary">
+            <thead class="table-success">
+              <tr>
+                  <th colspan="4" style="text-align: center;">Availability</th>
+              </tr>
+          </thead>
+            <thead class="table-success">
+                <tr>
+                    <th>Time Code</th>
+                    <th>Available from</th> 
+                    <th>Available through</th>                      
+                    <th>Action</th>
+                </tr>
+            </thead>
+            {% for menutime in menutimes %}
+
+            <tr>
+                <td>{{ menutime.time_code }}</td>
+                <td>{{ menutime.start_time }}</td>
+                <td>{{ menutime.end_time }}</td>
+                <td style="text-align: center;">
+                    <a href="{{ url_for('delete_menu_availability', menu_code=menu.menu_code,time_code=menutime.time_code) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                </td>
+            </tr>
+
+            {% else %}<tr>
+                <td colspan="4">No records found</td>
+            </tr>
+           
+            {% endfor %}
+        </table>
+        <form id="addMenuAvailabilityForm" name="addMenuAvailabilityForm" action="{{url_for('add_menu_availability',menu_code=menu.menu_code)}}" method="post" class="needs-validation" novalidate>
+          <div class="form-group">
+            <label for="menu_timeslot">TimeSlot</label>
+            <select class="form-control" id="menu_timeslot" name="menu_timeslot" required>
+              <option value="" selected>Select Timeslot</option>
+              {% for timeslot in timeslots %}
+              <option value="{{timeslot.time_code}}">From {{timeslot.start_time}} To {{timeslot.end_time}}</option>                
+              {% endfor %}
+            </select>
+            <div class="invalid-feedback">Please fill out this field.</div>
+          </div>          
+          <button class="form-control btn-success btn-block" type="submit">Add Availability</button>
+           </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      var form = document.getElementById('addMenuAvailabilityForm');
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    }, false);
+  })();
+</script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %} - Employee{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Employee Details
+        </h3>
+        <div class="card-body justify-content-center">
+          <h3 class="card-title text-center"></h3>
+          <!--Content to be here-->
+          <div class="table">
+            <p style="text-align: right;">
+            <a href="{{url_for('open_new_employee')}}" class="btn btn-primary btn-sm">Add Employee</a> 
+          </p>
+            <table class="table table-sm table-bordered table-hover">
+                <thead class="table-success">
+                    <tr>     
+                        <th>ID</th>                   
+                        <th>Employee ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for employee in employees %}
+
+                <tr>
+                    <td>{{ employee.id }}</td>
+                    <td>{{ employee.employee_id }}</td>
+                    <td>{{ employee.employee_first_name }}</td>
+                    <td>{{ employee.employee_last_name }}</td>
+                    <td>{{ employee.employee_gender }}</td>
+                    <td>{{ employee.employee_email }}</td>
+                    <td>{{ employee.employee_department }}</td>
+                    <td><a href="/employee/view/{{ employee.id }}" class="btn btn-primary btn-sm" style="display: inline-block; margin-right: 10px;"><i class="bi bi-binoculars"></i></a>
+                      <a href="/employee/edit/{{ employee.id }}" class="btn btn-primary btn-sm" style="display: inline-block; margin-right: 10px;"><i class="bi bi-pencil-square"></i></a>
+                        <a href="/employee/delete/{{ employee.id }}" class="btn btn-danger btn-sm" style="display: inline-block;" onclick="return confirm('Are you sure you want to delete?')"><i class="bi bi-trash"></i></a></td>
+                </tr>
+
+                {% else %}<tr>
+                    <td colspan="8">No records found</td>
+                </tr>
+               
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

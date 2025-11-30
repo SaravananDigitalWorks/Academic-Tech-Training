@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %} - Menu Details{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Menu Details
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <!--Content to be here-->
+          <div class=" table table-responsive-sm">
+            <p style="text-align: right;"><a href="{{url_for('open_new_menu')}}" class="btn btn-primary btn-sm">Add Menu</a></p>
+            
+            <table class="table table-sm table-bordered thead-primary">
+                <thead class="table-success">
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>                       
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for menu in menus %}
+
+                <tr>
+                    <td>{{ menu.menu_name }}</td>
+                    <td><i class="bi bi-currency-rupee"></i> {{ menu.menu_price|format_decimal }}</td>
+                    <td style="text-align: center;"><a href="{{ url_for('open_view_menu', id=menu.id) }}" class="btn btn-primary btn-sm">view</a>
+                      <a href="{{ url_for('open_edit_menu', id=menu.id) }}" class="btn btn-primary btn-sm">Edit</a>                      
+                        <a href="{{ url_for('delete_menu', id=menu.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    </td>
+                </tr>
+
+                {% else %}<tr>
+                    <td colspan="4">No records found</td>
+                </tr>
+               
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

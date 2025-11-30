@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %} - Employee{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Employee Details
+        </h3>
+        <div class="card-body justify-content-center">
+          <h3 class="card-title text-center"></h3>
+          <!--Content to be here-->
+          <div class="table">
+
+            <table class="table table-bordered">
+                <thead class="table-success text-center">
+                    <tr>                        
+                        <th colspan="2" >Employee details</th>                        
+                    </tr>
+                </thead>
+                <tr>
+                    <td>Employee Id</td><td>{{ employee.employee_id }}</td>             
+                </tr>
+                <tr><td>First Name</td><td>{{ employee.employee_first_name }}</td></tr>
+                <tr><td>Last Name</td><td>{{ employee.employee_last_name }}</td></tr>
+                <tr><td>Gender</td><td>{{ employee.employee_gender }}</td></tr>
+                <tr><td>Email</td><td>{{ employee.employee_email }}</td></tr>
+                <tr><td>Department</td><td>{{ employee.employee_department }}</td></tr>
+                <tr><td colspan="2" style="text-align: center;"><img src="{{ user_img_data }}" class="img-thumbnail float-left" alt="User image" style="display: block;"></td></tr>
+                <tr><td colspan="2" style="text-align: center;"><button type="button" class="btn btn-danger btn-block" onclick="redirectToEmployees()">Close</button>   </td></tr>
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

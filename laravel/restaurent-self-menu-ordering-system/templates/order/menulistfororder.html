@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %} - Menu Details{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Menu Details
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          {% if cart %}
+          
+          <p style="text-align: right;"><a href="{{url_for('open_odrer_summary')}}" class="btn btn-primary btn-sm">Order Summary</a></p>
+          {% endif %}
+
+          <div class=" table table-responsive-sm">
+            <table class="table table-sm thead-success">
+                <thead class="table-success" style="text-align: center;">
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>                       
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for menu in menus %}
+
+                <tr>
+                    <td>{{ menu.menu_name }}</td>
+                    <td><span>&#8377;</span> {{ menu.menu_price|format_decimal }}</td>
+                    <td style="text-align: center;"><a href="{{ url_for('add_to_cart', menu_code=menu.menu_code) }}" class="btn btn-primary btn-sm">Add for order</a>
+                    </td>
+                </tr>
+
+                {% else %}<tr>
+                    <td colspan="4">No records found</td>
+                </tr>
+               
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

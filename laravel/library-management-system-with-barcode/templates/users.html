@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}- Title {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          User Details
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <div class="table-responsive-sm">
+            <p style="text-align: right;"><a href="{{ url_for('open_new_user') }}" class="btn-sm btn-primary">Add User</a> </p>
+            <table class="table table-bordered thead-primary">
+                <thead class="table-success">
+                    <tr>
+                        <th>Id</th>
+                        <th>User Id</th>
+                        <th>User Name</th>
+                        <th>Email</th>                            
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for user in users %}
+
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.user_id }}</td>
+                    <td>{{ user.user_name }}</td>
+                    <td>{{ user.user_email }}</td>                        
+                    <td><a href="/deleteUser/{{ user.id }}" class="btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+                </tr>
+
+                {% else %}<tr>
+                    <td colspan="4">No records found</td>
+                </tr>
+               
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %} - Order Summary{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Order Summary
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <div class=" table table-responsive-sm">
+                        
+            <table class="table table-sm thead-primary">
+                <thead class="table-success">
+                    <tr>
+                        <th>Name</th>
+                        <th>Unit Price</th>                       
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                {% for item in cart %}
+
+                <tr>
+                    <td>{{ item.menu_name }}</td>
+                    <td><i class="bi bi-currency-rupee"></i> {{ item.unit_price|format_decimal }}</td>
+                    <td>
+                      <a href="{{ url_for('less_order_quantity', menu_code=item.menu_code) }}"> <i class="bi bi-dash-square"></i></i></a>
+                      {{ item.quantity }}
+                      <a href="{{ url_for('add_order_quantity', menu_code=item.menu_code) }}"> <i class="bi bi-plus-square"></i></a>
+                      
+                      </td>
+                    <td><i class="bi bi-currency-rupee"></i> {{ item.total|format_decimal }}</td>
+                </tr>
+
+                {% else %}<tr>
+                    <td colspan="4">No records found</td>
+                </tr>
+               
+                {% endfor %}
+
+                {% if cart|length > 0 %}
+                {% if cartSummary %}
+                {% for item in cartSummary %}
+                <tr>
+                  <td colspan="2" style="text-align: center; font-weight: bold;">Total</td>
+                  <td>  {{ item.t_quantity }}                   
+                    </td>
+                  <td><i class="bi bi-currency-rupee"></i> {{ item.t_price|format_decimal }}</td>
+                </tr>
+                <tr>
+                  <td colspan="4" style="text-align: center; font-weight: bold;">
+                    <a href="{{ url_for('submit_order') }}" class="btn btn-success">Submit Order</a> 
+                    <a href="{{url_for('list_menus_for_order')}}" class="btn btn-primary">Add items</a> 
+                    <a href="{{ url_for('less_order_quantity', menu_code=item.menu_code) }}" class="btn btn-danger">Cancel Order</a> 
+                  </td>                  
+                </tr>
+                {% endfor %}
+                {% endif %}
+                {% else %}
+                <tr>
+                  <td colspan="4" style="text-align: center; font-weight: bold;">
+                    <a href="#" class="btn btn-primary">Add items</a> 
+                     
+                  </td>                  
+                </tr>
+                {% endif %}
+
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

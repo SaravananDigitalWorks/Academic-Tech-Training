@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} - Department Details{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Department Details
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <!--Content to be here-->
+          <div class="table-responsive-sm">
+            <p style="text-align: right;"><a href="{{url_for('open_new_departnet')}}" class="btn btn-primary btn-sm">Add Department</a></p>
+            
+            <table class="table table-sm table-bordered thead-primary">
+                <thead class="table-success">
+                    <tr>
+                        <th>Id</th>
+                        <th>Department Code</th>
+                        <th>Department Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for department in departments %}
+
+                <tr>
+                    <td>{{ department.id }}</td>
+                    <td>{{ department.department_code }}</td>
+                    <td>{{ department.department_name }}</td>
+                    <td><a href="{{ url_for('open_edit_department', id=department.id) }}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{ url_for('delete_department', id=department.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    </td>
+                </tr>
+
+                {% else %}<tr>
+                    <td colspan="4">No records found</td>
+                </tr>
+               
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

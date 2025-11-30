@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}- About {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          About this application
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <p>
+            This application is developed using Python3.12 with two modules. One web based interface for maintaining employee details including their personal details with their face image. Other module which will scan each employee face and it will send signal to door opening module if the employee face is valid or security alert system module if the employee face is not valid.
+          </p>
+          <p>
+            Following technologies are used in this application.
+            <ul>
+              <li>Python Version 3.12</li>
+              <li>OpenCV Face detection library</li>     
+              <li>Python's Flask Framework</li>                      
+              <li>HTML</li>
+              <li>CSS(Cascading Style Sheets) </li>
+              <li>Bootstrap</li>
+              <li>jQuery</li>
+              <li>Java Script</li>
+              <li>SQLite Database</li>
+              <li>MVC Architecture</li>
+            </ul>
+          </p>
+          <p><u><h4>Employee Maintenance</h4></u></p>
+          <p>As part of employee onboarding process, administrator of this application, can add employee details using employee registration form. Using registration form, they can add user id, name, email, department, password and employee image. On submittion, these details are getting validated. Once all fields are validatied, employee information stored in the database.</p>
+          <p><u><h4>Security scanning</h4></u></p>
+          <p>This module is being attached to a live camera in front of the door. Each passing face is being captured by camera and passed to this module. This module compares incoming face images with existing models available in the system. If the incoming face image is matching with the model then it will send the success signal to door opening module. If there is no match then, alert signal will be sent to secutity module to alert unauthorized access.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

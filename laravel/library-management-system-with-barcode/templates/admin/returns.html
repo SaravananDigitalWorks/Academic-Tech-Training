@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %} - Request Details{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Request Details
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <!--Content to be here-->
+          <div class="table-responsive-sm">
+            <table class="table table-bordered thead-primary">
+                <thead class="table-success">
+                    <tr>
+                        <th>Book Id</th>
+                        <th>Book Title</th>
+                        <th>Language</th>  
+                        <th>Loaned Date</th>  
+                        <th>Loaned by</th>                       
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for book in books %}
+
+                <tr>
+                    <td>{{ book.book_id }}</td>
+                    <td>{{ book.book_title }}</td>
+                    <td>{{ book.lang_description }}</td>
+                    <td>{{ book.loaned_date }}</td>
+                    <td>{{ book.loanedby }}</td>
+                    <td>
+                      {% if session['userrole']=='ADMIN' %}                     
+                      <a href="{{url_for('receive_book',id=book.id) }}" class="btn-sm btn-primary btn-block" onclick="return confirm('Make sure you collected this book from member')">received</a>                     
+                      {% endif %}
+                    </td>
+                </tr>
+
+                {% else %}<tr>
+                    <td colspan="5">No records found</td>
+                </tr>
+               
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

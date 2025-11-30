@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}- Validation {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Validation Status
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title">
+            {% if response_data.status == 'success' %}
+            <p class="h3 text-success"><i class="bi bi-emoji-smile"></i> Validation Successful!</p>
+            <table class="table">
+              <tr>
+                <td>Registration number</td>
+                <td>{{student.reg_number}}</td>
+              </tr>
+              <tr>
+                <td>Center Code</td>
+                <td>{{student.center_code}}</td>
+              </tr>
+              <tr>
+                <td>Center Name</td>
+                <td>{{student.center_name}}</td>
+              </tr>         
+            </table>
+            <table><tr>
+              <td><img src="{{ user_img_data }}" class="img-thumbnail float-left" alt="User image"></td>
+              <td><img src="{{ qr_code_img_data }}" class="img-thumbnail float-right" alt="QR Code"></td>
+            </tr>
+          <tr>
+            <td colspan="2"><a href="{{url_for('list_students')}}" class="btn btn-danger btn-block" >Close</a></td>
+          </tr>
+          </table>
+            {% else %}
+            <p class="h3 text-danger"><i class="bi bi-emoji-astonished"></i> Validation Failed</p>
+            {% endif %}
+          </h3>
+          <!--Content to be here-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

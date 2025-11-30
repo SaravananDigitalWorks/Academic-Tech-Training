@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}- Edit Department{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card raised-table">
+        <h5 class="card-header">
+          Update Department
+        </h5>
+        <div class="card-body">        
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+
+          <form id="editDepartment" name="editDepartment" action="{{url_for('update_department',id=department.id)}}" method="post" class="needs-validation" novalidate>
+            <div class="form-group">
+              <label for="department_code">Department code:</label>
+              <input type="text" class="form-control" id="department_code" placeholder="Enter department code" name="department_code" required maxlength="3" minlength="3" style="text-transform: uppercase" value="{{department.department_code}}" readonly>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="department_name">Department Name:</label>
+              <input type="text" class="form-control" id="department_name" placeholder="Enter department name" name="department_name" required value="{{department.department_name}}">
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>    
+            <div class="form-group">
+              <label for="department_description">Department Details:</label>
+              <textarea class="form-control text-left" id="department_description" name="department_description" placeholder="Enter details abouth this department">{{department.department_description}}</textarea>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>   
+            <button class="form-control btn-success btn-block" type="submit">Update Department</button>  <br>
+            <button type="button" class="btn btn-danger btn-block" onclick="redirectToDepartments()">View Department(s)</button> 
+             </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  'use strict';
+  window.addEventListener('load', function () {
+    var form = document.getElementById('editDepartment');
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  }, false);
+})();
+</script>
+{% endblock %}

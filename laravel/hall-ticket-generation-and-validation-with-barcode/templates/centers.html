@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %} - Center Details{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          Center Details
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <!--Content to be here-->
+          <div class="table-responsive-sm">
+            <p style="text-align: right;"><a href="{{url_for('open_add_center')}}" class="btn-sm btn-primary">Add Center</a></p>
+            
+            <table class="table table-bordered thead-primary">
+                <thead class="table-success">
+                    <tr>
+                        <th>Id</th>
+                        <th>Center Code</th>
+                        <th>Center Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for center in centers %}
+
+                <tr>
+                    <td>{{ center.id }}</td>
+                    <td>{{ center.center_code }}</td>
+                    <td>{{ center.center_name }}</td>
+                    <td><a href="{{url_for('open_edit_center',id=center.id) }}" class="btn-sm btn-primary">Edit</a>
+                        <a href="{{url_for('delete_center',id=center.id) }}" class="btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete?')">Delete</a>
+                    </td>
+                </tr>
+
+                {% else %}<tr>
+                    <td colspan="5">No records found</td>
+                </tr>
+               
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

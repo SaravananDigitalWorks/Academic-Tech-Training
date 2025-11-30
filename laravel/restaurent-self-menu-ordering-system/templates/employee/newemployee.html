@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}- Add Employee{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card raised-table">
+        <h5 class="card-header">
+          Add Employee
+        </h5>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <!--Content to be here-->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+          {% for category, message in messages %}
+          <div class="flash-{{ category }}">
+            {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+          {% endwith %}
+
+          <form id="newemployeeForm" name="newemployeeForm" action="{{ url_for('add_employee') }}" enctype="multipart/form-data" method="post" class="needs-validation" novalidate autocomplete="off">
+            <div class="form-group">
+              <label for="employee_id">Employee ID</label>
+              <input type="text" class="form-control" id="employee_id" name="employee_id" required minlength="6" maxlength="10" style="text-transform: uppercase">
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="employee_first_name">First Name</label>
+              <input type="text" class="form-control" id="employee_first_name" name="employee_first_name" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="employee_last_name">Last Name</label>
+              <input type="text" class="form-control" id="employee_last_name" name="employee_last_name" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="employee_email">Email</label>
+              <input type="email" class="form-control" id="employee_email" name="employee_email" required>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="employee_gender">Gender</label>
+              <select class="form-control" id="employee_gender" name="employee_gender" required>
+                <option value="">Select Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="U">Other</option>
+              </select>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="employee_department">Department</label>
+              <select class="form-control" id="employee_department" name="employee_department" required>
+                <option value="" selected>Select Department</option>
+                {% for department in departments %}
+                <option value="{{department.department_code}}">{{department.department_name}}</option>                
+                {% endfor %}
+              </select>
+              <div class="valid-feedback">Valid.</div>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <div class="form-group">
+              <label for="employee_image">Image</label>
+              <input type="file" class="form-control-file" id="employee_image" name="employee_image" required accept=".jpg" >
+              <div class="valid-feedback">Valid.</div>
+              <small class="form-text text-muted">File must be in JPG format.</small>
+              <small class="form-text text-muted">Maximum file size: 1MB</small>
+              <div class="invalid-feedback">Please fill out this field.</div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Add Employee</button>
+            <button type="button" class="btn btn-danger btn-block" onclick="redirectToEmployees()">View Employee(s)</button> 
+             </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  'use strict';
+  window.addEventListener('load', function () {
+    var form = document.getElementById('newemployeeForm');
+    form.addEventListener('submit', function (event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  }, false);
+})();
+function validateFile() {
+  var fileInput = document.getElementById('employee_image');
+  if (fileInput.files.length > 0) {
+    var fileSize = fileInput.files[0].size;
+    var maxSize = 1 * 1024 * 1024; // 5MB
+    if (fileSize > maxSize) {
+      alert('File size exceeds the maximum limit.');
+      fileInput.value = "";
+      return false;
+    }
+  }
+  return true;
+}
+</script>
+{% endblock %}

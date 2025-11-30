@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %} - Order status{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <div class="alert alert-success " role="alert">            
+                   <p> Your Order has been submitted sucessfully!!!</p>
+                    <p> Order ID : {{orderid}}</p>
+                    <p>Reference number : {{OTP}}</p>
+        </div>
+          
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

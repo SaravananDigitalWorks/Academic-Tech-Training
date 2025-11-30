@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}- About {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          About this application
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <p>
+            This application is developed using Python3.12 with two modules. One for books maintenance with book details and another for book transaction maintenance like loan request, approve/reject loan request and receive books.
+          </p>
+          <p>
+            Following technologies are used in this application.
+            <ul>
+              <li>Python Version 3.12</li>
+              <li>Python barcode library</li>     
+              <li>Python's Flask Framework</li>                      
+              <li>HTML</li>
+              <li>CSS(Cascading Style Sheets) </li>
+              <li>Bootstrap</li>
+              <li>jQuery</li>
+              <li>Java Script</li>
+              <li>SQLite Database</li>
+              <li>MVC Architecture</li>
+            </ul>
+          </p>
+          <p><u><h4>Book Maintenance</h4></u></p>
+          <p>Once a new book is entered into library, administrator of this application, can make an entry in this system and add to the inventory. Once the book is entered into the inventory then it is available for users to search and loan the book</p>
+          <p><u><h4>Loan books</h4></u></p>
+          <p>With this module, user can request a book for loan if any copy of the book is available in the inventory. Administors will be able to review all loan requests and they can either approve or reject. They can also receive loaned books and mark it as received.</p>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

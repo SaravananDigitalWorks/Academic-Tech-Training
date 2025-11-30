@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}- About {% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card raised-table">
+        <h3 class="card-header">
+          About this Application
+        </h3>
+        <div class="card-body">
+          <h3 class="card-title text-center"></h3>
+          <p>
+            This application is developed using Python3.12. This application has two major modules. One for menu maintenance where administrator of this application make entry of list of menus provided by the restaurent and its available timings. Other module for 
+            ordering menus from available menu list.
+          </p>
+          <p>
+            Following technologies are used in this application.
+            <ul>
+              <li>Python Version 3.12</li>
+              <li>Python's Flask Framework</li>                      
+              <li>HTML</li>
+              <li>CSS(Cascading Style Sheets) </li>
+              <li>Bootstrap</li>
+              <li>jQuery</li>
+              <li>Java Script</li>
+              <li>SQLite Database</li>
+              <li>MVC Architecture</li>
+            </ul>
+          </p>
+          <p><u><h4>Menu Maintenance</h4></u></p>
+          <p>
+            With this module, administrators can enter list of menus offered by the restaurant. Also the available timing of these menus will be selected for each menu.
+List, Add, Edit and Delete menu are the list of operations available in this module.
+          </p>
+          <p><u><h4>Order Maintenance</h4></u></p>
+          <p>
+            User can select the menus they want and they can update the quantity they want. Once they selected all menus they can submit for an order. They can see the total amout before submitting order. Upon submitting, an order will be generated with order id and unique reference number.
+            User can view their order at any time by inputting the unique reference number.
+          </p>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
